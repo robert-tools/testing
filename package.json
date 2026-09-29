@@ -13,7 +13,7 @@
     "scripts": {
         "init": "robi init",
         "release": "robi release",
-        "build": "tsc -p tsconfig.build.json",
+        "build": "rm -rf dist && tsc -p tsconfig.build.json",
         "test": "jest --coverage --runInBand --verbose",
         "lint": "eslint .",
         "check": "npm run lint && npm test && npm run build",
@@ -55,5 +55,12 @@
         "jest-environment-jsdom": "^29.6.2",
         "ts-jest": "^29.4.0",
         "typescript": "^5.9.0"
+    },
+    "dependencies": {
+        "@robert.tools/cmd": "^1.0.0",
+        "@robert.tools/curl": "^1.0.1",
+        "@robert.tools/log": "^1.0.0",
+        "@robert.tools/uri": "^1.0.0",
+        "@robert.tools/utils": "^1.2.0"
     }
 }
