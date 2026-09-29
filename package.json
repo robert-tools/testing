@@ -13,6 +13,10 @@
     "scripts": {
         "init": "robi init",
         "release": "robi release",
+        "status": "robi status",
+        "version": "robi version",
+        "verbose": "robi verbose",
+        "pub": "npm whoami && npm publish --access public",
         "build": "rm -rf dist && tsc -p tsconfig.build.json",
         "test": "jest --coverage --runInBand --verbose",
         "lint": "eslint .",
