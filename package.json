@@ -1,7 +1,7 @@
 {
-    "name": "@robert.tools/sample",
-    "version": "1.1.1",
-    "description": "<description>",
+    "name": "@robert.tools/testing",
+    "version": "0.0.1",
+    "description": "A set of helper for testing",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "exports": {
@@ -21,20 +21,20 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/robert-tools/<name>.git"
+        "url": "git+https://github.com/robert-tools/testing.git"
     },
     "bugs": {
-        "url": "https://github.com/robert-tools/<name>/issues"
+        "url": "https://github.com/robert-tools/testing/issues"
     },
-    "homepage": "https://github.com/robert-tools/<name>#readme",
+    "homepage": "https://github.com/robert-tools/testing#readme",
     "keywords": [
         "typescript",
         "node",
-        "<name>",
+        "testing",
         "robert.tools"
     ],
-    "author": "<author>",
-    "license": "<license>",
+    "author": "Robert Willemelis",
+    "license": "MIT",
     "engines": {
         "node": ">=22"
     },
@@ -43,7 +43,7 @@
         "registry": "https://registry.npmjs.org/"
     },
     "devDependencies": {
-        "@robert.tools/setup": "^1.1.1",
+        "@robert.tools/setup": "^1.2.0",
         "@types/jest": "^29.5.14",
         "@types/node": "^24.0.0",
         "@typescript-eslint/eslint-plugin": "^8.0.0",

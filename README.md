@@ -1,19 +1,19 @@
-# @robert.tools/sample
+# @robert.tools/testing
 
-<description>
+A set of helper for testing
 
 ## Installation
 
 ```bash
-npm install @robert.tools/sample
+npm install @robert.tools/testing
 ```
 
 ## Usage
 
 ```typescript
-import { <name> } from '@robert.tools/sample';
+import { testing } from '@robert.tools/testing';
 
-<name>('hello'); // '<name>: hello'
+testing('hello'); // 'testing: hello'
 ```
 
 ## commands

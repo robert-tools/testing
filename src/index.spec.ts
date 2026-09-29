@@ -1,11 +1,11 @@
 import { sample } from './index';
 
-describe('@robert.tools/sample', () => {
-    it('should return a <name> string', () => {
+describe('@robert.tools/testing', () => {
+    it('should return a testing string', () => {
         expect(sample('hello')).toBe('sample: hello');
     });
 
-    it('should return a <name> string with empty input', () => {
+    it('should return a testing string with empty input', () => {
         expect(sample('')).toBe('sample: ');
     });
 });
