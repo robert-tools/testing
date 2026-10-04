@@ -303,11 +303,12 @@ describe('getMockedURLs()', () => {
         const domain_200 = 'example_200.com';
         const domain_301 = 'example_301.com';
         const url_200 = `https://www.${domain_200}`;
+        const url_200_1 = `https://www.${domain_200}/`;
         const url_301 = `https://www.${domain_301}`;
         const url_301_2 = `https://www.${domain_301}/`;
         const content = 'some content';
         const forwards = {
-            [domain_200]: { status: 200, order: [url_200] },
+            [domain_200]: { status: 200, order: [url_200, url_200_1] },
             [domain_301]: { status: 301, order: [url_301, url_301_2] },
             [SVG_GITHUB]: { status: 200, content: '<svg>' },
             [NO_HOST]: { content: 'no_connect' },
@@ -316,19 +317,24 @@ describe('getMockedURLs()', () => {
         };
         const CONTENT_301 =
             '<html><body><h1>301 Moved Permanently</h1></body></html>';
-        const CONTENT_200 = 'some content';
+        // const CONTENT_200 = 'some content';
+        const _ = (status: number, content: string, location: string) => {
+            return { status, content, location };
+        };
         const EXPECTED = {
             forwards: {
-                [url_200]: _raw({ status: 200, content }),
-                [url_301]: _raw({ status: 200, content: CONTENT_301 }),
-                [url_301_2]: _raw({ status: 200, content: CONTENT_200 }),
+                [url_200]: _raw(_(301, CONTENT_301, url_200_1)),
+                [url_200_1]: _raw({ status: 200, content }),
+                // [url_200_1]: _raw(_(200, content, url_200_1)),
+                [url_301]: _raw(_(301, CONTENT_301, url_301_2)),
+                [url_301_2]: _raw(_(301, CONTENT_301, url_301_2)),
                 fallback: _raw({ status: 404 }),
                 fallback2: _raw({ status: 0 }),
                 [SVG_GITHUB]: _raw({ status: 200, content: '<svg>' }),
                 [NO_HOST]: 'no_connect\n',
             },
             orders: {
-                [domain_200]: [url_200],
+                [domain_200]: [url_200, url_200_1],
                 [domain_301]: [url_301, url_301_2],
             },
         };

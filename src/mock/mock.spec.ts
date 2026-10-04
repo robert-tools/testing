@@ -29,8 +29,9 @@ describe('✅ _header()', () => {
         expect(result).toEqual(_raw({ status: 200 }, { eol: 'CRLF' }));
     });
     it('[301] should return extended response', () => {
-        const location = `https://www.${DOMAIN_301}`;
-        const result = FN(`https://www.${DOMAIN_301}`);
+        const request = `https://www.${DOMAIN_301}`;
+        const location = `${request}/`; // TODO: check
+        const result = FN(request);
         const result2 = _response({ location, status: 301 });
         expect(result).toEqual(result2);
         expect(result).toEqual(_raw({ status: 301 }));
@@ -63,8 +64,9 @@ describe('✅ _response()', () => {
     });
     it('[301] should return extended response', () => {
         const status = 301;
-        const result = FN({ location: DOMAIN_200, status, content });
         const location = `www.${DOMAIN_200}`; // new location
+        const result = FN({ location, status, content });
+        // const result = FN({ location: DOMAIN_200, status, content });
         expect(result).toEqual(_raw({ content, location, status }, config));
     });
 });
@@ -191,12 +193,7 @@ describe('✅ _httpItem()', () => {
     });
     it('[301] should return the correct HTTP item for a different status code detected by domain', () => {
         const lastLocation = `https://www.${DOMAIN_301}/`;
-        const EXPECTED = _http(200, {
-            contentLength,
-            lastLocation,
-            etag,
-            lastModified,
-        });
+        const EXPECTED = _http(301, { lastLocation });
         const result = FN(lastLocation);
 
         expect(result).toEqual(EXPECTED);

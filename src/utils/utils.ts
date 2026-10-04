@@ -107,7 +107,8 @@ export const getNextUrl = (
     const max = order.length - 1;
     const index = isForwarded ? max : order.indexOf(url);
     const indexMax = order.length - 1;
-    const isLast = index === indexMax;
+    // no order: always last
+    const isLast = order.length > 0 ? index >= 0 && index === indexMax : true;
     const lastLocation = url;
     if (index > -1) {
         if (index === indexMax) {
@@ -244,18 +245,14 @@ export const getMockedURLs = (ITEMS: MOCK_CONFIG, _content = ''): URL_ITEMS => {
         } else if (item.order) {
             const order = item.order || [];
             orders[domain] = order;
+            const statusCode = getProp(item, 'status', 0);
             for (const forward of order) {
                 const current = forward;
                 const index = order.indexOf(forward);
                 const nextIndex = index + 1;
                 const next = order[nextIndex] || order[order.length - 1];
                 const isFinal = current === next;
-                const statusCode = getProp(item, 'status', 0);
-                const status: number = isFinal
-                    ? statusCode !== 301
-                        ? statusCode
-                        : 200 // config with 301 and last step
-                    : 301;
+                const status: number = isFinal ? statusCode : 301;
                 const statusMessage = getStatusMessage(status);
                 let content = _content;
                 switch (status) {
@@ -264,12 +261,14 @@ export const getMockedURLs = (ITEMS: MOCK_CONFIG, _content = ''): URL_ITEMS => {
                         break;
                     default:
                         if (item.status && statusMessage) {
-                            content = `<html><body><h1>${item.status} ${statusMessage}</h1></body></html>`;
+                            content = `<html><body><h1>${status} ${statusMessage}</h1></body></html>`;
                         }
                         break;
                 }
-                const config = { noLastLocation: true };
-                const _item = _httpItem(current, { status, content }, config);
+                const config = { noLastLocation: true, FORWARDS: ITEMS };
+                const location = next;
+                const alt = { status, content, location };
+                const _item = _httpItem(current, alt, config);
                 const statusRow = getHttpStatusRow(_item.header);
                 const header = { [statusRow]: undefined, ..._item.header };
                 forwards[current] = formatResponse(header, { content });

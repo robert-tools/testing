@@ -1,6 +1,6 @@
 // 🧩 types
-import { ITEMS } from '@robert.tools/typings';
-import type { MOCK_CONFIG } from './typings.d';
+import { ITEMS, URI } from '@robert.tools/typings';
+import type { MOCK_CONFIG, STATUS } from './typings.d';
 
 // ⚓ CONSTANTS
 // end-of-line characters
@@ -75,6 +75,9 @@ const createOrder = (domain: string) => [
     `https://www.${domain}`,
     `https://www.${domain}/`,
 ];
+export const createForwards = (domain: URI, status: STATUS) => {
+    return { status, order: createOrder(domain) };
+};
 
 const location = `https://www.${DOMAIN_301}/`;
 export const custom: { [key: number]: any } = {
@@ -86,10 +89,10 @@ export const custom: { [key: number]: any } = {
 };
 
 export const FORWARDS: MOCK_CONFIG = {
-    [DOMAIN_200]: { status: 200, order: createOrder(DOMAIN_200) },
-    [DOMAIN_301]: { status: 301, order: createOrder(DOMAIN_301) },
-    [DOMAIN_404]: { status: 404, order: createOrder(DOMAIN_404) },
-    [DOMAIN_500]: { status: 500, order: createOrder(DOMAIN_500) },
+    [DOMAIN_200]: createForwards(DOMAIN_200, 200),
+    [DOMAIN_301]: createForwards(DOMAIN_301, 301),
+    [DOMAIN_404]: createForwards(DOMAIN_404, 404),
+    [DOMAIN_500]: createForwards(DOMAIN_500, 500),
     [DOMAIN_STATUS_0]: { status: 0, order: [`${DOMAIN_STATUS_0}`] },
     [DOMAIN_UNKNOWN]: { status: 0, order: [`${DOMAIN_UNKNOWN}`] },
 };

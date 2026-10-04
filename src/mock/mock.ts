@@ -117,17 +117,16 @@ export const _httpItem = (
     alt: HTTP_BASE = {},
     opts: HTTP_OPTS = {}
 ): CurlItem => {
-    const urlItem = getNextUrl(url, FORWARDS, opts);
+    const forwards = getProp(opts, 'FORWARDS', FORWARDS);
+    const urlItem = getNextUrl(url, forwards, opts);
     let statusCode: number = getProp(alt, 'status', urlItem.statusCode);
     const content = getProp(alt, 'content', '');
     const locationPart = _locationItem(urlItem, opts);
-    if (statusCode === 301 && urlItem.isLast) {
-        statusCode = 200;
-    }
 
     const header: HTTP = {
         ...getBaseHeader(statusCode),
         ...locationPart,
+        ...(alt.location ? { location: alt.location } : {}),
     };
     let item: any = {
         success: statusCode > 0 && statusCode < 400,
