@@ -299,6 +299,7 @@ describe('✅ getStatusMessage', () => {
 });
 describe('getMockedURLs()', () => {
     const FN = getMockedURLs;
+    const content = 'some content';
     it('should return the correct forwards for a given domain', () => {
         const domain_200 = 'example_200.com';
         const domain_301 = 'example_301.com';
@@ -306,9 +307,13 @@ describe('getMockedURLs()', () => {
         const url_200_1 = `https://www.${domain_200}/`;
         const url_301 = `https://www.${domain_301}`;
         const url_301_2 = `https://www.${domain_301}/`;
-        const content = 'some content';
+        const contentX = 'some lorem content';
         const forwards = {
-            [domain_200]: { status: 200, order: [url_200, url_200_1] },
+            [domain_200]: {
+                status: 200,
+                order: [url_200, url_200_1],
+                content: contentX,
+            },
             [domain_301]: { status: 301, order: [url_301, url_301_2] },
             [SVG_GITHUB]: { status: 200, content: '<svg>' },
             [NO_HOST]: { content: 'no_connect' },
@@ -324,7 +329,7 @@ describe('getMockedURLs()', () => {
         const EXPECTED = {
             forwards: {
                 [url_200]: _raw(_(301, CONTENT_301, url_200_1)),
-                [url_200_1]: _raw({ status: 200, content }),
+                [url_200_1]: _raw({ status: 200, content: contentX }),
                 // [url_200_1]: _raw(_(200, content, url_200_1)),
                 [url_301]: _raw(_(301, CONTENT_301, url_301_2)),
                 [url_301_2]: _raw(_(301, CONTENT_301, url_301_2)),

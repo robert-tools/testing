@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.2
+
+### 🐛 Bugfixes
+
+- allow content to be set for forwarded items
+
+## 1.1.1
+
+### 🐛 Bugfixes
+
+- pass through forward ITEMS and get correct http status
+
 ## 1.1.0
 
 ### ⚙️ chore

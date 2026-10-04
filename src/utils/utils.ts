@@ -235,7 +235,7 @@ export const getMockedURLs = (ITEMS: MOCK_CONFIG, _content = ''): URL_ITEMS => {
     const domains = Object.keys(ITEMS);
     for (const domain of domains) {
         const item = ITEMS[domain];
-        if (item.content) {
+        if (item.content && !item.order) {
             if (item.status) {
                 forwards[domain] = _raw(item);
             } else {
