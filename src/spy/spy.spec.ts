@@ -3,10 +3,7 @@ import { command } from '@robert.tools/cmd';
 import { LOG } from '@robert.tools/log';
 
 // 📦 internal dependencies
-import { spyOnCommand, spyOnURLs } from './index';
-
-// 🧩 types
-import type { RAW, URL_ITEMS } from './index.d';
+import { spyOnCommand, spyOnURLs } from './spy';
 
 describe('✅ spyOnCommand', () => {
     const FN = spyOnCommand;
@@ -28,45 +25,31 @@ describe('✅ spyOnCommand', () => {
 });
 describe('✅ spyOnURLs', () => {
     const FN = spyOnURLs;
-    const results: URL_ITEMS = {
-        forwards: {
-            url1: 'HTTP/2 mocked result 1',
-            url2: 'HTTP/2 mocked result 2',
-            url3: 'HTTP/2 mocked result 3',
-            fallback: '<fallback-result>' as RAW,
-        },
-        orders: {
-            url1: ['url1', 'url3'],
-        },
+    const forwards = {
+        ['url1.com']: { content: 'HTTP/2 mocked result 1' },
+        fallback: { content: '<fallback-result>' },
     };
     it('should create a spy on cmd.command and return the specified result for each URL ID', () => {
-        const spy = FN(results);
-        expect(command('url1')).toBe('HTTP/2 mocked result 1');
-        expect(spy).toHaveBeenCalledWith('url1');
+        const spy = FN(forwards);
+        expect(command('url1.com')).toBe('HTTP/2 mocked result 1\n');
+        expect(spy).toHaveBeenCalledWith('url1.com');
         spy.mockRestore();
     });
     it('should create a spy on cmd.command and return a fallback for unknown URL IDs', () => {
-        const spyCMD = FN(results);
+        const spyCMD = FN(forwards);
         const spyLOG = jest.spyOn(LOG, 'FAIL');
-        expect(command('url5')).toBe('<fallback-result>');
+        expect(command('url5')).toBe('<fallback-result>\n');
         expect(spyCMD).toHaveBeenCalledWith('url5');
         expect(spyLOG).toHaveBeenCalledWith('No mock result for URL ID: url5');
         spyCMD.mockRestore();
         spyLOG.mockRestore();
     });
     it('should create a spy on cmd.command and return <invalid> for unknown URL IDs when no fallback', () => {
-        const results: URL_ITEMS = {
-            forwards: {
-                url1: 'HTTP/2 mocked result 1',
-                url2: 'HTTP/2 mocked result 2',
-                url3: 'HTTP/2 mocked result 3',
-            },
-            orders: {
-                url1: ['url1', 'url3'],
-            },
+        const forwards = {
+            ['url1.com']: { content: 'HTTP/2 mocked result 1' },
         };
 
-        const spyCMD = FN(results);
+        const spyCMD = FN(forwards);
         const spyLOG = jest.spyOn(LOG, 'FAIL');
         expect(command('url4')).toBe('<invalid>');
         expect(spyCMD).toHaveBeenCalledWith('url4');

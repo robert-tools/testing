@@ -22,15 +22,27 @@ npm install @robert.tools/testing
 import { spyOnCommand } from '@robert.tools/testing';
 
 const spy = spyOnCommand('hello');
-command('curl someurl') // 'result: hello'
+command('curl someurl') // 'result: hello\n'
 ```
 
 ## 🗃️ commands
 
 After an npm install with `npm i` the following commands are available:
 
+### 📦 Spy functions
+
 * spy on command and return result: `spyOnCommand(result)`
-* spy on URLs and return result: `spyOnURLs(results)`
+* spy on URLs and return result: `spyOnURLs(input)`
+
+### 📦 Mock functions
+
+* header of HTTP response: `_header(domain, opts)`
+* mock HTTP response from HTTP item: `_response(base, opts)`
+* get HTTP item from domain and options: `_headerItem(url, alt, opts)`
+* get HTTP item from status and items: `_http(status, alt)`
+* get the header HTTP item from status and items: `_head(status, alt)`
+* get the full CurlItem from url, alt and opts: `_httpItem(url, alt, opts)`
+* get the raw data from Properties and config: `_raw(base, config)`
 
 ## ⚖️ Notes
 

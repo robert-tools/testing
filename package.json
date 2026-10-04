@@ -3,7 +3,7 @@
     "version": "1.0.1",
     "description": "A set of helper for testing",
     "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
+    "types": "./dist/typings.d.ts",
     "exports": {
         ".": "./dist/index.js"
     },
@@ -62,9 +62,11 @@
     },
     "dependencies": {
         "@robert.tools/cmd": "^1.0.0",
-        "@robert.tools/curl": "^1.0.1",
+        "@robert.tools/convert": "^1.1.0",
+        "@robert.tools/curl": "^1.0.2",
         "@robert.tools/log": "^1.0.0",
+        "@robert.tools/typings": "^1.0.6",
         "@robert.tools/uri": "^1.0.0",
-        "@robert.tools/utils": "^1.2.0"
+        "@robert.tools/utils": "^1.3.0"
     }
 }
