@@ -1,6 +1,6 @@
 {
     "name": "@robert.tools/testing",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "A set of helper for testing",
     "main": "./dist/index.js",
     "types": "./dist/typings.d.ts",
