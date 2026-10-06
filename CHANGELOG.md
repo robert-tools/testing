@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.3
+
+### 🐛 Bugfixes
+
+- entry point for types from typings.d.ts. to index.d.ts
+
 ## 1.1.2
 
 ### 🐛 Bugfixes
