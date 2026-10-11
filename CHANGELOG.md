@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.4
+
+### 🐛 Bugfixes
+
+- use any time just if available
+
 ## 1.1.3
 
 ### 🐛 Bugfixes
