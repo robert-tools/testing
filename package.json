@@ -18,7 +18,7 @@
         "verbose": "robi verbose",
         "pub": "npm whoami && npm publish --access public",
         "build": "rm -rf dist && tsc -p tsconfig.build.json",
-        "test": "jest --coverage --runInBand --verbose",
+        "test": "jest --coverage --runInBand --verbose --no-watchman",
         "lint": "eslint .",
         "check": "npm run lint && npm test && npm run build",
         "prepublishOnly": "npm run check"

@@ -6,6 +6,10 @@
 
 - use any time just if available
 
+### ⚙️ chore
+
+- deactivate watchman because it blocks form file system guard of virus scanner
+
 ## 1.1.3
 
 ### 🐛 Bugfixes
