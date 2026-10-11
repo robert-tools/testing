@@ -80,7 +80,8 @@ export const _http = (status: STATUS, alt: any = {}): CurlItem => {
     const httpOpts: ITEMS = filterAllowedItems(alt, KEYS_HEADER, BASE_FILTERED);
     const baseOpts: ITEMS = filterAllowedItems(alt, KEYS_BASE);
     const success = status > 0 && status < 400;
-    const time = getProp(alt, 'time', expect ? expect.any(Number) : MOCK_TIME);
+    const hasJest = typeof expect !== 'undefined';
+    const time = getProp(alt, 'time', hasJest ? expect.any(Number) : MOCK_TIME);
     const result = {
         header: {
             ...getBaseHeader(status),

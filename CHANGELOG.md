@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.5
+
+### 🐛 Bugfixes
+
+- `expect` not exists in production environment
+
 ## 1.1.4
 
 ### 🐛 Bugfixes
